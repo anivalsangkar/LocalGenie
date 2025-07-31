@@ -5,7 +5,7 @@ import { AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
 
 const SelectPersona = () => {
   const [selectedPersona, setSelectedPersona] = useState(null);
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSelect = (persona) => {
     setSelectedPersona(persona);
@@ -15,6 +15,7 @@ const SelectPersona = () => {
   const handleGetStarted = () => {
     if (selectedPersona) {
       console.log("Selected Persona:", selectedPersona);
+      navigate("/home")
     }
   };
 

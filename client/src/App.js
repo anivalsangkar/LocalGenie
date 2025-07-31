@@ -4,6 +4,7 @@ import Signup from "./pages/Signup";
 import CreateAccount from "./pages/CreateAccount";
 import SelectPersona from "./pages/SelectPersona";
 import SplashScreen from "./pages/SplashScreen";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/signup" element={<Signup />}/>
         <Route path="/create-account" element={<CreateAccount />} />
         <Route path="/select-persona" element={<SelectPersona />} />
+        <Route path="/home" element={<Home />}/>
       </Routes>
     </Router>
   );
