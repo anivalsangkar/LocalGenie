@@ -11,3 +11,4 @@ router.get('/dashboard', verifyToken, (req, res) => {
 });
 
 module.exports = router;
+
