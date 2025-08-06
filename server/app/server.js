@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const connectDB = require('./config/db');
 const User = require('./models/User');
 const protectedRoute = require('./routes/protectedRoute');
+const userRoutes = require('./routes/userRoutes');
 
 // 🔐 Load environment variables from .env
 dotenv.config();
@@ -76,6 +77,7 @@ app.post('/api/login', async (req, res) => {
 
 // ✅ Protected routes
 app.use('/api', protectedRoute);
+app.use('/user', userRoutes);
 
 // 🚀 Start server
 const PORT = process.env.PORT || 5050;
