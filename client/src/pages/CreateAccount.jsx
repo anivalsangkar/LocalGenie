@@ -50,7 +50,7 @@ const CreateAccount = () => {
           Sign Up
         </button>
         <p style={styles.loginLink}>
-          Already have an account? <a href="/">Log in</a>
+          Already have an account? <a href="/signup">Log in</a>
         </p>
       </div>
     </div>
