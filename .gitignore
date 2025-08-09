@@ -1,2 +1,6 @@
 __pycache__/
 *.py[cod]server/app/uploads/
+node_modules/
+.env
+.DS_Store
+server/app/uploads/
