@@ -2,7 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
+const openaiRoute = require('./app/routes/openaiRoute');
 
+app.use('/api', openaiRoute);
 app.use(bodyParser.json());
 app.use(require('cors')());
 

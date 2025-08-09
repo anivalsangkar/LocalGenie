@@ -1,6 +1,8 @@
+// server/app/routes/protectedRoute.js
+
 const express = require('express');
 const router = express.Router();
-const verifyToken = require('../middleware/authMiddleware');
+const { verifyToken } = require('../middleware/authMiddleware'); // ✅ Destructuring correctly
 
 router.get('/dashboard', verifyToken, (req, res) => {
   res.json({
@@ -11,4 +13,3 @@ router.get('/dashboard', verifyToken, (req, res) => {
 });
 
 module.exports = router;
-

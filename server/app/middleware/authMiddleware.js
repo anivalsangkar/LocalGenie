@@ -1,3 +1,27 @@
+// server/app/middleware/authMiddleware.js
+
+const jwt = require('jsonwebtoken');
+
+exports.verifyToken = (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1];
+
+  if (!token) return res.status(401).json({ message: 'No token provided' });
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'super$ecretjwt|Token5182');
+    req.user = decoded;
+    next();
+  } catch (error) {
+    res.status(403).json({ message: 'Invalid or expired token' });
+  }
+};
+
+
+
+
+
+
+/*
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = 'super$ecretjwt|Token5182';
 
@@ -16,3 +40,4 @@ function verifyToken(req, res, next) {
 }
 
 module.exports = verifyToken;
+*/
