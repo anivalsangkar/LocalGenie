@@ -6,6 +6,9 @@ const { OpenAI } = require('openai');
 const path = require('path');
 const fs = require('fs');
 require('dotenv').config();
+const { parseCityState } = require('../lib/location')
+const { buildPlaceSummary } = require('../lib/composePlaceSummary')
+const { LRUCache } = require('../lib/cache')
 
 /* ----------------------------- OpenAI client ----------------------------- */
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
@@ -42,12 +45,12 @@ const isOnTopic = (s = '') => ALLOW_TERMS.some(t => String(s).toLowerCase().incl
 
 /* ---------------------- Guided Relocation Questionnaire ------------------ */
 const RELOCATION_QUESTIONS = [
-  { key: 'destinationCity',   q: 'Which city are you moving to?' },
-  { key: 'partySize',         q: 'How many people are relocating (adults/kids)?' },
-  { key: 'monthlyBudget',     q: 'What is your approximate monthly housing budget (USD)?' },
-  { key: 'commutePrefs',      q: 'What’s your ideal commute (minutes) and mode (car/public transit/walk)?' },
-  { key: 'safetyPriority',    q: 'How important is safety on a scale of 1–5 (and any specific concerns)?' },
-  { key: 'lifestyleInterests',q: 'Any lifestyle interests to prioritize? (e.g., quiet, nightlife, parks, cafes, schools)' }
+  { key: 'destinationCity', q: 'Which city are you moving to?' },
+  { key: 'partySize', q: 'How many people are relocating (adults/kids)?' },
+  { key: 'monthlyBudget', q: 'What is your approximate monthly housing budget (USD)?' },
+  { key: 'commutePrefs', q: 'What’s your ideal commute (minutes) and mode (car/public transit/walk)?' },
+  { key: 'safetyPriority', q: 'How important is safety on a scale of 1–5 (and any specific concerns)?' },
+  { key: 'lifestyleInterests', q: 'Any lifestyle interests to prioritize? (e.g., quiet, nightlife, parks, cafes, schools)' }
 ];
 
 function ensureRelocationSession(sessionId) {
@@ -66,6 +69,18 @@ function endSession(sessionId) {
   const s = SESSIONS.get(sessionId);
   if (s) s.mode = 'free';
 }
+
+/* ------------------------------ Place summary detection + cache ---------------------------- */
+const SUMMARY_TRIGGERS = [
+  'summary of', 'tell me about', 'about', 'city summary', 'overview of', 'info on', 'information on'
+];
+
+function isPlaceSummaryPrompt(s = '') {
+  const str = String(s).toLowerCase()
+  return SUMMARY_TRIGGERS.some(t => str.includes(t))
+}
+
+const placeCache = new LRUCache({ max: 200, ttlMs: 1000 * 60 * 10 })
 
 /* ------------------------------ /api/generate ---------------------------- */
 /**
@@ -87,6 +102,25 @@ router.post('/generate', async (req, res) => {
     if (reset) {
       SESSIONS.delete(sessionId);
       return res.json({ reply: 'Relocation session reset. Say “I want to relocate to <city>” to begin.' });
+    }
+
+    /* ---------- New: Place summary orchestrator (runs before relocation) ---------- */
+    if (isPlaceSummaryPrompt(prompt)) {
+      const place = parseCityState(prompt);
+      if (place?.city && place?.state) {
+        const key = `place:${place.city},${place.state}`;
+        const data = await placeCache.wrap(key, async () => {
+          return await buildPlaceSummary({ city: place.city, state: place.state });
+        });
+
+        const reply = `Here's a summary of ${place.city}, ${place.state}.`;
+        return res.json({
+          reply,
+          ui: { type: 'place_summary', data },
+          meta: { mode: 'place_summary' }
+        });
+      }
+      // If we didn't parse a {city,state}, just fall through to your normal flows
     }
 
     // Only auto-detect relocation when client didn't explicitly choose a mode
@@ -229,7 +263,7 @@ async function handleTranscription(req, res) {
       temperature: 0
     });
 
-    try { fs.unlinkSync(tempPath); } catch {}
+    try { fs.unlinkSync(tempPath); } catch { }
 
     const text = (transcription?.text || '').trim();
 
