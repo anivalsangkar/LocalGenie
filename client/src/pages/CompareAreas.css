@@ -1,0 +1,25 @@
+.cmp-wrap{ max-width:430px; margin:0 auto; background:#f7f9fc; color:#0f172a; font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto; }
+.cmp-topbar{ display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:#eef2f7; }
+.cmp-icon{ border:none; background:transparent; font-size:20px; cursor:pointer; }
+.cmp-title{ font-weight:700; font-size:20px; }
+.cmp-chat{ background:#eef2ff; border-radius:12px; padding:6px 8px; }
+
+.cmp-picker{ padding:12px 14px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+.cmp-input{ flex:1; min-width:200px; padding:10px 12px; border:1px solid #e2e8f0; border-radius:12px; background:#fff; }
+
+.cmp-note{ padding:8px 14px; color:#475569; font-size:13px; }
+.cmp-err{ padding:8px 14px; color:#b91c1c; font-size:13px; }
+
+.cmp-table{ margin:10px 14px; border-radius:12px; overflow:hidden; border:1px solid #e2e8f0; }
+.cmp-row{ display:grid; grid-template-columns: 1.2fr 1fr 1fr; }
+.cmp-head{ background:#f1f5f9; font-weight:700; }
+.cmp-row.alt{ background:#f8fafc; }
+.cmp-cell{ padding:14px; border-bottom:1px solid #e2e8f0; }
+.star{ color:#f59e0b; margin-right:6px; }
+
+.cmp-reco{ margin:14px; background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:14px; }
+.cmp-reco-head{ font-weight:700; margin-bottom:6px; }
+.cmp-reco-name{ font-size:20px; font-weight:800; margin-bottom:6px; }
+.cmp-reco-text{ color:#334155; line-height:1.5; }
+.cmp-tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+.cmp-tag{ background:#eaf2ff; color:#1e3a8a; border-radius:999px; padding:6px 10px; font-size:13px; }

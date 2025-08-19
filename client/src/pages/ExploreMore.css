@@ -1,0 +1,31 @@
+.ex-wrap { max-width: 430px; margin: 0 auto; background:#f7f9fc; font-family: ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto; color:#0f172a; }
+.ex-topbar{ display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:#fff; }
+.ex-icon{ border:none; background:transparent; font-size:20px; cursor:pointer; }
+.ex-status{ font-weight:600; opacity:.7; }
+.ex-sys{ opacity:.5; letter-spacing:4px; }
+
+.ex-header{ display:flex; align-items:center; justify-content:space-between; padding:8px 16px; }
+.ex-title{ margin:0; font-size:16px; color:#6b7280; text-transform:lowercase; }
+.ex-bubble{ background:#eef2ff; border-radius:12px; padding:6px 8px; }
+
+.ex-search{ display:flex; gap:8px; padding:8px 16px; }
+.ex-search input{ flex:1; padding:12px 14px; border:1px solid #e2e8f0; border-radius:14px; background:#fff; font-size:14px; }
+.ex-mic{ border:1px solid #e2e8f0; background:#fff; border-radius:14px; padding:0 12px; cursor:pointer; }
+
+.ex-tabs{ display:flex; gap:12px; padding:6px 16px 10px; overflow-x:auto; }
+.ex-tab{ padding:10px 14px; border-radius:16px; border:1px solid #e2e8f0; background:#fff; cursor:pointer; font-weight:600; }
+.ex-tab.active{ background:#1d4ed8; color:#fff; border-color:#1d4ed8; }
+.ex-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; padding:10px 16px 24px; }
+.ex-loading{ grid-column:1/-1; padding:16px; color:#475569; }
+.ex-empty{ grid-column:1/-1; padding:24px; text-align:center; color:#94a3b8; }
+
+.ex-card{ background:#fff; border:1px solid #e2e8f0; border-radius:16px; overflow:hidden; box-shadow:0 1px 2px rgba(0,0,0,.04); }
+.ex-imgwrap{ position:relative; height:110px; overflow:hidden; }
+.ex-imgwrap img{ width:100%; height:100%; object-fit:cover; display:block; }
+.ex-heart{ position:absolute; right:8px; top:8px; border:none; background:rgba(255,255,255,.9); border-radius:999px; width:34px; height:34px; font-size:18px; cursor:pointer; }
+.ex-card-body{ padding:10px 12px; }
+.ex-card-title{ font-weight:700; margin-bottom:4px; }
+.ex-card-sub{ color:#64748b; font-size:13px; line-height:1.3; min-height:34px; }
+.ex-card-row{ display:flex; align-items:center; gap:6px; margin-top:6px; }
+.ex-rate{ font-weight:700; }
+.ex-star{ color:#f59e0b; }

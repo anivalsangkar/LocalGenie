@@ -1,0 +1,54 @@
+/* src/pages/AreaDetails.css */
+.ad-wrap {
+    max-width: 430px;            /* mobile frame look */
+    margin: 0 auto;
+    background: #fff;
+    color: #0f172a;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  
+  .ad-topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 12px;
+  }
+  .ad-icon-btn { background: transparent; border: none; font-size: 20px; cursor: pointer; }
+  .ad-status { font-weight: 600; opacity: .7; }
+  .ad-system-icons { opacity: .5; letter-spacing: 4px; }
+  
+  .ad-hero { position: relative; width: 100%; height: 260px; overflow: hidden; }
+  .ad-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ad-hero-nav { position: absolute; top: 50%; transform: translateY(-50%); border: none; background: rgba(0,0,0,.35); color: #fff; font-size: 26px; width: 36px; height: 36px; border-radius: 18px; cursor: pointer; }
+  .ad-hero-nav.left { left: 10px; }
+  .ad-hero-nav.right { right: 10px; }
+  .ad-dots { position: absolute; bottom: 10px; width: 100%; display: flex; gap: 6px; justify-content: center; }
+  .ad-dot { width: 8px; height: 8px; border-radius: 999px; background: rgba(255,255,255,.5); cursor: pointer; }
+  .ad-dot.active { background: #fff; }
+  
+  .ad-body { padding: 16px; }
+  .ad-title-row { display: flex; align-items: center; justify-content: space-between; }
+  .ad-title { font-size: 22px; margin: 0; }
+  .ad-icon-badge { border: none; background: #eef2ff; border-radius: 10px; padding: 6px 8px; cursor: pointer; }
+  
+  .ad-desc { margin: 10px 0 14px; line-height: 1.5; color: #334155; }
+  
+  .ad-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .ad-chip { background: #eaf2ff; color: #1e3a8a; border-radius: 999px; padding: 6px 10px; font-size: 13px; }
+  
+  .ad-section { font-size: 16px; margin: 18px 0 10px; }
+  
+  .ad-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .ad-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 14px; }
+  .ad-card.wide { grid-column: 1 / -1; }
+  .ad-card-label { font-size: 13px; color: #475569; margin-bottom: 6px; }
+  .ad-card-value { font-size: 20px; font-weight: 700; }
+  
+  .ad-accordion { margin-top: 14px; border: 1px solid #e2e8f0; border-radius: 12px; background: #fff; }
+  .ad-accordion > summary { cursor: pointer; padding: 14px; list-style: none; font-weight: 600; }
+  .ad-accordion[open] > summary { border-bottom: 1px solid #e2e8f0; }
+  .ad-accordion-body { padding: 12px 14px; color: #334155; }
+  
+  .ad-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 24px; }
+  .ad-btn { padding: 12px 14px; border-radius: 12px; border: 1px solid #cbd5e1; background: #fff; font-weight: 600; cursor: pointer; }
+  .ad-btn.ghost { background: #fff; }
+  .ad-btn.primary { background: #2563eb; color: #fff; border-color: #2563eb; }
+  
