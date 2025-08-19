@@ -25,6 +25,17 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Service',
   }],
+  location: {
+    type: {
+      type: String, // e.g., 'Point'
+      enum: ['Point'],
+      default: 'Point'
+    },
+    coordinates: {
+      type: [Number], // [longitude, latitude]
+      default: [0, 0]
+    }
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);
