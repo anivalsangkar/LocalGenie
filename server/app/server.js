@@ -56,7 +56,7 @@ app.post('/api/register', async (req, res) => {
 
 // ✅ Login route
 app.post('/api/login', async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, location } = req.body;
 
   try {
     const user = await User.findOne({ email });
@@ -64,6 +64,12 @@ app.post('/api/login', async (req, res) => {
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(401).json({ message: 'Invalid email or password' });
+
+    // Update location if provided
+    if (location && Array.isArray(location.coordinates) && location.coordinates.length === 2) {
+      user.location = location;
+      await user.save();
+    }
 
     const token = jwt.sign({ id: user._id, email: user.email }, JWT_SECRET, { expiresIn: '1h' });
 
